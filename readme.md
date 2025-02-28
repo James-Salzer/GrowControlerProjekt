@@ -30,10 +30,10 @@ GrowintelliPi ist ein Open-Source-Projekt, das einen intelligenten Grow-Controll
 
 Beiträge sind willkommen! Bitte lies die CONTRIBUTING.md
 
-(muss noch erstellt werden)
+(ToDo)
 
 für weitere Informationen.
 
 ## Lizenz:
 
-Muss ich noch prüfen, vermutlich eine Open Source Lizenz
+(ToDo)
