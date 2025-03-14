@@ -1,3 +1,5 @@
+import sys
+sys.path.append("E:/Daten/James/Growcontroler/GrowControlerProjekt")  # Füge das Stammverzeichnis hinzu
 from fastapi import FastAPI
 from webinterface import views
 import uvicorn
