@@ -1,11 +1,11 @@
-from fastapi import APIRouter, Request
-from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
+from django.shortcuts import render
+from django.http import JsonResponse
 
-router = APIRouter()
+def index(request):
+    return render(request, 'index.html', {'message': 'Hallo, GrowController!'})
 
-templates = Jinja2Templates(directory="webinterface/templates")
+def button_click(request):
+    if request.method == 'POST':
+        return JsonResponse({'status': 'Button-Klick empfangen'})
+    return JsonResponse({'status': 'Button-Klick empfangen'})
 
-@router.get("/", response_class=HTMLResponse)
-async def read_item(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "message": "Hello World"})
