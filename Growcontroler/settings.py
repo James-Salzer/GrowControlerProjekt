@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+#os.path.join(BASE_DIR, 'webinterface', 'templates') # Remove this line, it's not used
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +27,10 @@ SECRET_KEY = 'django-insecure-bai%u-dp9g*oj9_0%ool%95xk)b64-ej)!t=r&w0c0@w5ym1em
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.178.43",
+                 "127.0.0.1",
+                 "localhost",
+                 "0.0.0.0",]
 
 
 # Application definition
@@ -37,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'webinterface',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +127,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Netzwerk Einstellungen
+SENSOR_API_URL = os.environ.get('SENSOR_API_URL', 'http://localhost:5000/data')
+SENSOR_API_USERNAME = os.environ.get('SENSOR_API_USERNAME', 'default_user')
+SENSOR_API_PASSWORD = os.environ.get('SENSOR_API_PASSWORD', 'default_password')
