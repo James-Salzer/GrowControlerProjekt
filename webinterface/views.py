@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.db import connection
 from django.conf import settings
+from .models import Sensor, SensorData, Actor
 
 ## @brief Checks if the required database tables exist.
 #  @return True if all tables exist, False otherwise.
@@ -44,10 +45,12 @@ def index(request):
     if not check_database_tables():
         return render(request, 'error.html', {'message': 'Database tables are missing.'})
     ip_address = get_ip_address()
+    sensors = Sensor.objects.all()
+    actors = Actor.objects.all()
     return render(
         request,
         'index.html',
-        {'message': 'Hallo, GrowController!', 'ip_address': ip_address}
+        {'message': 'Hallo, GrowController!', 'ip_address': ip_address, 'sensors': sensors, 'actors': actors}
     )
 
 ## @brief Handles button click events.
