@@ -1,39 +1,45 @@
-# GrowintelliPi - Intelligenter Grow Controller für Raspberry Pi
+# GrowController
 
-GrowintelliPi ist ein Open-Source-Projekt, das einen intelligenten Grow-Controller für den Raspberry Pi entwickelt. Der Controller ermöglicht die präzise Steuerung und Überwachung von Pflanzenumgebungen in Grow-Zelten, Gewächshäusern oder anderen geschlossenen Systemen.
+## Beschreibung
 
-## Funktionen:
+Der GrowController ist ein Projekt zur intelligenten Steuerung und Überwachung einer Pflanzenumgebung. Er ermöglicht die flexible und benutzerfreundliche Steuerung von Sensoren und Aktoren über ein Webinterface.
 
-- Steuerung und Überwachung von Sensoren (Temperatur,
-- Luftfeuchtigkeit, Bodenfeuchtigkeit, etc.)
-- Ansteuerung von Aktoren (Relais, Pumpen, LEDs, etc.)
-- Webinterface für Konfiguration und Steuerung
-- Automatisierte Bewässerung und Klimatisierung
-- Zeitpläne und Regeln für die Umgebungssteuerung
-- Einfache Installation und Konfiguration
-- Erweiterbar durch Plugins und Module
+## Funktionen
 
-## Technologien:
+*   Anzeige aktueller Sensorwerte (Temperatur, Luftfeuchtigkeit, Bodenfeuchtigkeit, etc.)
+*   Manuelle und automatische Steuerung von Aktoren (Relais, PWM-Controller)
+*   Konfiguration des Systems über das Webinterface
+*   Protokollierung von Daten und Ereignissen
+*   Update-Funktionalität
 
-- Raspberry Pi
-- Python, Django
-- SQLite
-- HTML, CSS, JavaScript
+## Installation
 
-## Zielgruppe:
+1.  Lade die portable PHP-Version herunter und entpacke sie in den Ordner `php`.
+2.  Aktiviere die SQLite3-Erweiterung in der `php.ini`-Datei.
+3.  Kopiere die Projektdateien auf den Raspberry Pi.
+4.  Starte den PHP-Webserver mit dem Befehl `python start.py`.
+5.  Öffne das Webinterface im Browser.
 
-- Hobbygärtner
-- Professionelle Züchter
-- Forschungseinrichtungen
+## Konfiguration
 
-## Beiträge:
+Die Konfiguration des Systems erfolgt über das Webinterface. Hier können Sensoren und Aktoren konfiguriert, Zeitpläne erstellt und andere Einstellungen vorgenommen werden.
 
-Beiträge sind willkommen! Bitte lies die CONTRIBUTING.md
+## Verwendung
 
-(ToDo)
+Das Webinterface bietet ein übersichtliches Dashboard mit allen wichtigen Informationen. Über die Navigation können die verschiedenen Funktionen des Systems aufgerufen werden.
 
-für weitere Informationen.
+## Lizenz
 
-## Lizenz:
+Dieses Projekt ist unter der MIT-Lizenz lizenziert.
 
-(ToDo)
+## Kontakt
+
+James Salzer
+
+## Mitwirkende
+
+*   James Salzer
+
+## Danksagung
+
+Vielen Dank an alle, die zu diesem Projekt beigetragen haben!

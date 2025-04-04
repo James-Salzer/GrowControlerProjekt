@@ -1,0 +1,37 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+.header {
+    background-color: #f0f0f0;
+    height: 10%;
+    width: 100%;
+    text-align: left;
+}
+.content {
+    height: 85%;
+    width: 100%;
+    text-align: center;
+    display: flex; /* Use flexbox to arrange tables side by side */
+}
+.footer {
+    background-color: #e0e0e0;
+    height: 5%;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+}
+.table-container {
+    width: 50%; /* Each table takes up 50% of the content width */
+    height: 100%;
+    overflow: auto; /* Add scrollbars if content overflows */
+}
+
+/* Gauge styles */
+.table-container table .gauge-container {
+    width: 100px;
+    height: 75px; /* Increased height for better visibility */
+    position: relative;
+}
+

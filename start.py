@@ -2,23 +2,20 @@ import os
 import subprocess
 
 def main():
-    print("Starting GrowController...")
+    print("Starting GrowController with PHP...")
 
-    # Apply migrations
-    print("Applying migrations...")
-    try:
-        subprocess.check_call(['python', 'manage.py', 'migrate'])
-        print("Migrations applied successfully.")
-    except subprocess.CalledProcessError as e:
-        print(f"Error applying migrations: {e}")
+    # Find the path to the php executable
+    php_executable = os.path.join(os.getcwd(), "php", "php.exe")
+    if not os.path.exists(php_executable):
+        print("Error: php executable not found. Please ensure the php folder is in the project root.")
         return
 
-    # Start the development server
-    print("Starting development server...")
+    # Start the PHP web server
+    print("Starting PHP web server...")
     try:
-        subprocess.check_call(['python', 'manage.py', 'runserver', '0.0.0.0:8000'])
+        subprocess.check_call([php_executable, '-S', '0.0.0.0:8000', '-t', '.'])
     except subprocess.CalledProcessError as e:
-        print(f"Error starting development server: {e}")
+        print(f"Error starting PHP web server: {e}")
         return
 
 if __name__ == "__main__":

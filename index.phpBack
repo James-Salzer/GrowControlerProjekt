@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GrowController</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/gauge.min.js"></script>
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    <?php
+      $db = new SQLite3('db.sqlite3');
+      $sensors = $db->query('SELECT * FROM webinterface_sensor');
+      while ($sensor = $sensors->fetchArray()) {
+        $sensor_id = $sensor['id'];
+        $sensor_data = $db->query("SELECT * FROM webinterface_sensordata WHERE sensor_id = $sensor_id ORDER BY timestamp DESC LIMIT 1");
+        $data = $sensor_data->fetchArray();
+        $value = json_decode($data['value'], true);
+        $thresholds = json_decode($data['thresholds'], true);
+
+        foreach ($value as $key => $val) {
+          echo "var target_" . $sensor_id . "_" . $key . " = document.getElementById('gauge-container-" . $sensor_id . "-" . $key . "');";
+          echo "if (target_" . $sensor_id . "_" . $key . ") {";
+          echo "  var gauge_" . $sensor_id . "_" . $key . " = new Gauge(target_" . $sensor_id . "_" . $key . ").setOptions({";
+          echo "angle: 0.15, lineWidth: 0.5, radiusScale: 0.9, pointer: { length: 0.6, strokeWidth: 0.035, color: '#000000' }, limitMax: " . $thresholds[$key] * 4 . ", limitMin: 0, colorStart: '#6FADCF', colorStop: '#66CC66', strokeColor: '#E0E0E0', generateGradient: true, highDpiSupport: true, staticLabels: { font: '10px sans-serif', labels: [0, " . $thresholds[$key] * 0.5 . ", " . $thresholds[$key] . ", " . $thresholds[$key] * 2 . ", " . $thresholds[$key] * 3 . ", " . $thresholds[$key] * 4 . "], fractionDigits: 0 }, staticZones: [ { strokeStyle: '#FF6666', min: 0, max: " . $thresholds[$key] * 0.5 . " }, { strokeStyle: '#FFBF00', min: " . $thresholds[$key] * 0.5 . ", max: " . $thresholds[$key] * 0.7 . " }, { strokeStyle: '#66CC66', min: " . $thresholds[$key] * 0.7 . ", max: " . $thresholds[$key] * 1.3 . " }, { strokeStyle: '#FFBF00', min: " . $thresholds[$key] * 1.3 . ", max: " . $thresholds[$key] * 2 . " }, { strokeStyle: '#FF6666', min: " . $thresholds[$key] * 2 . ", max: " . $thresholds[$key] * 3 . " } ] });";
+          echo "  gauge_" . $sensor_id . "_" . $key . ".maxValue = 100; gauge_" . $sensor_id . "_" . $key . ".set(" . $val . ");";
+          echo "}";
+        }
+      }
+      $db->close();
+    ?>
+  });
+</script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>GrowController</h1>
+    </div>
+    <div class="content">
+        <div class="table-container">
+            <table>
+                <h2 style="padding: 20px; text-align:left">Sensoren</h2>
+                <thead>
+                    <tr>
+                        <th style="padding: 20px;">Name</th>
+                        <th style="padding: 20px;">Wert</th>
+                        <th style="padding: 20px;">Art</th>
+                        <th style="padding: 20px;">Schwellwert</th>
+                        <th style="padding: 20px;">Diagramm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $db = new SQLite3('db.sqlite3');
+                        $sensors = $db->query('SELECT * FROM webinterface_sensor');
+                        while ($sensor = $sensors->fetchArray()) {
+                            $sensor_id = $sensor['id'];
+                            $sensor_data = $db->query("SELECT * FROM webinterface_sensordata WHERE sensor_id = $sensor_id ORDER BY timestamp DESC LIMIT 1");
+                            $data = $sensor_data->fetchArray();
+                            $value = json_decode($data['value'], true);
+                            $thresholds = json_decode($data['thresholds'], true);
+
+                            foreach ($value as $key => $val) {
+                                echo "<tr>";
+                                echo "<td>" . $sensor['sensor_name'] . "</td>";
+                                echo "<td>" . $val . "</td>";
+                                echo "<td>" . substr($key, 0, 4) . "</td>";
+                                echo "<td>" . $thresholds[$key] . "</td>";
+                                echo "<td><canvas id='gauge-container-" . $sensor_id . "-" . $key . "'></div></td>"; // Hier wird ein div erstellt
+                                echo "</tr>";
+                            }
+                        }
+                        $db->close();
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-container">
+            <table>
+            <h2 style="padding: 20px; text-align:left">Aktoren</h2>
+                <thead>
+                    <tr>
+                        <th style="padding: 20px;">Name</th>
+                        <th style="padding: 20px;">Zustand</th>
+                        <th style="padding: 20px;">Diagramm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $db = new SQLite3('db.sqlite3');
+                        $actors = $db->query('SELECT * FROM webinterface_actor');
+                        while ($actor = $actors->fetchArray()) {
+                            echo "<tr>";
+                            echo "<td>" . $actor['actor_name'] . "</td>";
+                            echo "<td>" . ($actor['is_on'] ? 'Ein' : 'Aus') . "</td>";
+                            echo "<td>";
+                            if ($actor['is_on']) {
+                                echo "<img src='includes/images/actor_on.jpg' alt='Aktor ist Ein' width='50'>";
+                            } else {
+                                echo "<img src='includes/images/actor_off.jpg' alt='Aktor ist Aus' width='50'>";
+                            }
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                        $db->close();
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2023 GrowController</p>
+    </div>
+    <!--<script src="js/script.js"></script>!-->
+</body>
+</html>
