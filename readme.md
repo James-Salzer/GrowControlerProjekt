@@ -14,11 +14,7 @@ Der GrowController ist ein Projekt zur intelligenten Steuerung und Überwachung 
 
 ## Installation
 
-1.  Lade die portable PHP-Version herunter und entpacke sie in den Ordner `php`.
-2.  Aktiviere die SQLite3-Erweiterung in der `php.ini`-Datei.
-3.  Kopiere die Projektdateien auf den Raspberry Pi.
-4.  Starte den PHP-Webserver mit dem Befehl `python start.py`.
-5.  Öffne das Webinterface im Browser.
+Noch nicht, es gibt noch nicht wirklich was zum installieren.
 
 ## Konfiguration
 
