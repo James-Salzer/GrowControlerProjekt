@@ -1,0 +1,41 @@
+# Node modules
+node_modules/
+
+# Composer vendor directory
+vendor/
+
+# Laravel environment files
+.env
+.env.*
+
+# PHPStorm project files
+.idea/
+
+# VSCode settings
+.vscode/
+
+# Laravel log files
+storage/logs/*.log
+
+# Laravel cache files
+bootstrap/cache/*.php
+
+# SQLite database
+database/*.sqlite
+
+# PHP unit test result cache
+.phpunit.result.cache
+
+# Laravel Horizon
+horizon/*.json
+
+# Ignored files
+*.log
+*.cache
+*.bak
+*.swp
+*.tmp
+
+# System files
+.DS_Store
+Thumbs.db
