@@ -12,7 +12,7 @@ vendor/
 .idea/
 
 # VSCode settings
-.vscode/
+.vscode
 
 # Laravel log files
 storage/logs/*.log
