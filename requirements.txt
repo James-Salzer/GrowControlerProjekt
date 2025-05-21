@@ -1,0 +1,11 @@
+# Core ORM for database interaction
+sqlalchemy>=1.4,<2.0 # Example: Pinning to a version range for compatibility
+
+# Potential future additions (commented out for now):
+# RPi.GPIO # For Raspberry Pi GPIO interaction
+# Flask # If a Python-based API/web interface is needed
+# requests # For making HTTP requests from Python
+# paho-mqtt # If MQTT communication is implemented
+# Adafruit_DHT # For specific DHT sensor libraries if not simulating
+# pandas # For data analysis
+# numpy # For numerical operations with pandas or other libraries
